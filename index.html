@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add More Row - jQuery Validate</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+        integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.16/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="json-viewer/jquery.json-viewer.css" rel="stylesheet">
+    <link href="prism/prism.css" rel="stylesheet">
+    <style>
+        .select2-selection {
+            -webkit-box-shadow: 0;
+            box-shadow: 0;
+            background-color: #fff;
+            border: 0;
+            border-radius: 0;
+            color: #555555;
+            font-size: 14px;
+            outline: 0;
+            min-height: 38px;
+            text-align: left;
+        }
+
+        .select2-selection__rendered {
+            margin: 5px;
+        }
+
+        .select2-selection__arrow {
+            margin: 5px;
+        }
+        .add-more-wrapper, #cloneSection {
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #000;
+            padding-bottom: 15px;
+        }
+        label em, .onex-error, .onex-error-label {
+            color: #dc3545;
+        }
+        span.select2-custom-error {
+            border: 1px solid #dc3545;
+            border-radius: 5px;
+        }
+        .onex-error {
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container mt-3">
+        <div class="row mb-5">
+            <div class="col-md-12">
+                <h1><strong><i class="fas fa-users text-primary"></i> Add More Row - jQuery Validate</strong></h1>
+                <hr />
+            </div>
+            <form name="frm" id="frmx" action="" method="POST">
+                <div class="row">
+                    <div class="col-md-12" id="cloneSection">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label for="name0" class="onex-form-lebel" data-forkey="name">Name: <em>*</em></label>
+                                <input type="text" name="name[0]" id="name0" data-idkey="name" data-namekey="name"
+                                    class="form-control onex-form-control get-name" placeholder="Name..." required="required" />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="email0" class="onex-form-lebel" data-forkey="email">Email:
+                                    <em>*</em></label>
+                                <input type="email" name="email[0]" id="email0" data-idkey="email" data-namekey="email"
+                                    class="form-control onex-form-control get-email" placeholder="Email..." required="required" />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="mobile0" class="onex-form-lebel" data-forkey="mobile">Mobile:
+                                    <em>*</em></label>
+                                <input type="text" name="mobile[0]" id="mobile0" data-idkey="mobile" data-namekey="mobile"
+                                    class="form-control onex-form-control get-mobile" placeholder="Mobile..."
+                                    required="required" />
+                            </div>
+                            <div class="col-md-2">
+                                <label for="designation0" class="onex-form-lebel" data-forkey="designation">Designation:
+                                    <em>*</em></label>
+                                <select name="designation[0]" id="designation0" data-idkey="designation" data-namekey="designation"
+                                    class="form-select onex-select2 onex-form-control get-designation" required="required">
+                                    <option></option>
+                                    <option value="Web Developer">Web Developer</option>
+                                    <option value="UI/UX Designer">UI/UX Designer</option>
+                                    <option value="DevOps">DevOps</option>
+                                    <option value="Mobile Application Developer">Mobile Application Developer</option>
+                                    <option value="Graphics Designer">Graphics Designer</option>
+                                    <option value="Senior Developer">Senior Developer</option>
+                                    <option value="Team Leader">Team Leader</option>
+                                    <option value="Project Manager">Project Manager</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label>Sex: <em>*</em></label>
+                                <div>
+                                    <input type="radio" name="sex[0]" id="sexMale0" data-idkey="sexMale"
+                                        data-namekey="sex" class="form-check-input onex-form-control get-sex" value="Male"
+                                        required="required" /> <label class="form-check-label onex-form-lebel"
+                                        for="sexMale0" data-forkey="sexMale">Male</label>
+                                    <input type="radio" name="sex[0]" id="sexFemale0" data-idkey="sexFemale"
+                                        data-namekey="sex" class="form-check-input onex-form-control get-sex" value="Female" />
+                                    <label class="form-check-label onex-form-lebel" for="sexFemale0"
+                                        data-forkey="sexFemale">Female</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2"></div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-2">
+                                <label>Skill (s): <em>*</em></label>
+                                <div class="skill-error-container" id="skillErrorContainer0"></div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-check">
+                                    <input type="checkbox" name="skills[0]" id="skillNodeJs0" data-idkey="skillNodeJs"
+                                        data-namekey="skills" class="form-check-input onex-form-control get-skills" value="Node Js"
+                                        required="required" />
+                                    <label class="form-check-label onex-form-lebel" for="skillNodeJs0"
+                                        data-forkey="skillNodeJs">Node Js</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" name="skills[0]" id="skillVueJs0" data-idkey="skillVueJs"
+                                        data-namekey="skills" class="form-check-input onex-form-control get-skills"
+                                        value="Vue Js" />
+                                    <label class="form-check-label onex-form-lebel" for="skillVueJs0"
+                                        data-forkey="skillVueJs">Vue Js</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-check">
+                                    <input type="checkbox" name="skills[0]" id="skillReactJs0" data-idkey="skillReactJs"
+                                        data-namekey="skills" class="form-check-input onex-form-control get-skills"
+                                        value="React Js" />
+                                    <label class="form-check-label onex-form-lebel" for="skillReactJs0"
+                                        data-forkey="skillReactJs">React Js</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" name="skills[0]" id="skillAngularJs0"
+                                        data-idkey="skillAngularJs" data-namekey="skills"
+                                        class="form-check-input onex-form-control get-skills" value="Angular Js" />
+                                    <label class="form-check-label onex-form-lebel" for="skillAngularJs0"
+                                        data-forkey="skillAngularJs">Angular Js</label>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-check">
+                                    <input type="checkbox" name="skills[0]" id="skillNextJs0" data-idkey="skillNextJs"
+                                        data-namekey="skills" class="form-check-input onex-form-control get-skills"
+                                        value="Next Js" />
+                                    <label class="form-check-label onex-form-lebel" for="skillNextJs0"
+                                        data-forkey="skillNextJs">Next Js</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="checkbox" name="skills[0]" id="skillElectronJs0"
+                                        data-idkey="skillElectronJs" data-namekey="skills"
+                                        class="form-check-input onex-form-control get-skills" value="Electron Js" />
+                                    <label class="form-check-label onex-form-lebel" for="skillElectronJs0"
+                                        data-forkey="skillElectronJs">Electron Js</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 remove-row"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="addMoreRows"></div>
+                <div class="row mt-3">
+                    <div class="col-md-8">
+                        <button type="button" class="btn btn-success" id="saveAllBtn"><i class="fas fa-save"></i> Save All</button>
+                        <button type="button" class="btn btn-danger" onClick="window.location.reload();"><i class="fas fa-power-off"></i> Clear</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-primary" id="addMoreBtn"><i class="fas fa-plus"></i> Add
+                            More</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="resultModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="resultModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="resultModalLabel">Result Data</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <pre id="resultData"></pre>
+                    </div>
+                    <div class="col-md-6">
+                        <pre class="line-numbers">
+                            <code id="resultDataCopy" class="language-json"></code>
+                        </pre>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="copyJsonBtn">Copy Raw Json</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.16/dist/sweetalert2.all.min.js"></script>
+    <script src="json-viewer/jquery.json-viewer.js"></script>
+    <script src="prism/prism.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $('.onex-select2').select2({
+                width: '100%',
+                placeholder: 'Select an option',
+                allowClear: false
+            });
+
+            /** Clone */
+            let addMoreCount = 1;
+            $('#addMoreBtn').on('click', function () {
+                let clone = $('#cloneSection').clone();
+                clone.attr('id', 'addMoreWrapper' + addMoreCount);
+                clone.addClass('add-more-wrapper');
+
+                clone.find('span.select2.select2-container').remove();
+                clone.find('div.onex-error').remove();
+                clone.find('.form-select')
+                    .removeClass('select2-hidden-accessible')
+                    .removeAttr('data-select2-id')
+                    .removeAttr('tabindex')
+                    .removeAttr('aria-hidden')
+                    .children('option')
+                    .removeAttr('data-select2-id');
+
+                clone.find('.form-control').val('');
+                clone.find('.form-select').val('');
+                clone.find('.form-check-input').prop('checked', false);
+                clone.find('.form-check-input').removeAttr('checked');
+
+                clone.find('.remove-row')
+                    .html(`<button type="button" class="btn btn-danger btn-sm remove-row-btn" data-remove-row-id="${addMoreCount}"><i class="fas fa-trash-alt"></i> Remove</button>`);
+
+                $('#addMoreRows').append(clone);
+
+                if (clone.find('.onex-form-lebel').length) {
+                    clone.find('.onex-form-lebel').each(function () {
+                        $(this).attr('for', $(this).data('forkey') + addMoreCount);
+                        $(this).removeClass('onex-error-label');
+                    });
+                }
+                if (clone.find('.onex-form-control').length) {
+                    clone.find('.onex-form-control').each(function (i, e) {
+                        $(this).attr('id', $(this).data('idkey') + addMoreCount);
+                        $(this).removeClass('onex-error');
+                        $(this).removeAttr('aria-describedby');
+                        $(this).removeClass('is-valid');
+                        $(this).removeClass('is-invalid');
+                    });
+                }
+                if (clone.find('.form-check-input').length) {
+                    clone.find('.form-check-input').each(function () {
+                        $(this).attr('name', $(this).data('namekey') + '[' + addMoreCount + ']');
+                        $(this).removeClass('onex-error');
+                    });
+                }
+                if (clone.find('.form-control').length) {
+                    clone.find('.form-control').each(function () {
+                        $(this).attr('name', $(this).data('namekey') + '[' + addMoreCount + ']');
+                        $(this).removeClass('onex-error');
+                    });
+                }
+                if (clone.find('.form-select').length) {
+                    clone.find('.form-select').each(function () {
+                        $(this).attr('name', $(this).data('namekey') + '[' + addMoreCount + ']');
+                        $(this).removeClass('onex-error');
+                        select2Init($(this).attr('id'));
+                    });
+                }
+                if (clone.find('.skill-error-container').length) {
+                    clone.find('.skill-error-container').each(function() {
+                        $(this).attr('id', $(this).attr('id').substring(0, $(this).attr('id').length - 1) + addMoreCount);
+                    });
+                }
+                addValidation(addMoreCount);
+                addMoreCount++;
+                $("html, body").animate({ scrollTop: $(document).height() }, 'fast');
+                //$("html, body").animate({ scrollTop: $(document).height() - $(window).height() });
+            });
+
+            /** Remove */
+            $('body').on('click', '.remove-row-btn', function() {
+                $(this).parents('.add-more-wrapper').remove();
+            });
+
+            /** Save */
+            $('#saveAllBtn').on('click', function() {
+                if($("#frmx").valid()) {
+                    let _serialize = $('#frmx').serialize();
+                    let _serializeArray = $('#frmx').serializeArray();
+                    
+                    $('#resultDataCopy').html(frmResultData(true));
+                    Prism.highlightAll();
+
+                    let _jsonResult = eval('(' + frmResultData() + ')');
+                    $('#resultData').jsonViewer(_jsonResult, {
+                        withQuotes: true,
+                        withLinks: false
+                    });
+
+                    displayLoading();
+
+                    setTimeout(() => {
+                        $('#resultModal').modal('show');
+                    }, 3000);
+
+                    //$("#frmx").submit();
+                }
+            });
+
+            /** Dynamically select2 call */
+            function select2Init(elemId) {
+                $('#' + elemId).select2({
+                    width: '100%',
+                    placeholder: 'Select an option',
+                    allowClear: false
+                });
+            }
+            
+            /** Validation */
+            $("#frmx").validate({
+                errorClass: 'onex-error',
+                errorElement: 'div',
+                rules: {
+                },
+                messages: {
+                },
+                errorPlacement: function (error, element) {
+                    if(element.attr('type') == 'radio') {
+                        error.insertAfter(element.parent());
+                    } else if(element.attr('type') == 'checkbox') {
+                        var _no = element.attr('id')[element.attr('id').length - 1];
+                        $('#skillErrorContainer' + _no).html(error);
+                    } else if(element.hasClass('onex-select2')) {
+                        error.insertAfter(element.parent().find('span.select2-container'));
+                    } else {
+                        error.insertAfter(element);
+                    }
+                },
+                highlight: function (element) {
+                    $(element).removeClass('is-valid').addClass('is-invalid');
+                    $(element).parent().find('.onex-form-lebel').addClass('onex-error-label');
+                    if(element.type == 'checkbox') {
+                        $(`input[name="${element.name}"]`).each(function() {
+                            $(this).addClass('is-invalid');
+                        })
+                    }
+                    if(element.type == 'select-one') {
+                        $(element).next('span.select2-container').addClass('select2-custom-error');
+                    }
+                },
+                unhighlight: function (element) {
+                    $(element).removeClass('is-invalid').addClass('is-valid');
+                    $(element).parent().find('.onex-form-lebel').removeClass('onex-error-label');
+                    if(element.type == 'checkbox') {
+                        $(`input[name="${element.name}"]`).each(function() {
+                            if($(this).is(':checked')) {
+                                $(this).removeClass('is-invalid').addClass('is-valid');
+                            } else {
+                                $(this).removeClass('is-invalid').removeClass('is-valid');
+                            }
+                        })
+                    }
+                }
+            });
+
+            /** Once select2 select any item */
+            $('body').on('select2:select', '.onex-select2', function (e) { 
+                if($(this).val() != '') {
+                    $('#' + $(this).attr('id') + '-error').hide();
+                    $(this).next('span.select2-container').removeClass('select2-custom-error');
+                    $(this).parent().find('.onex-form-lebel').removeClass('onex-error-label');
+                }
+            });
+
+            /** validation add method */
+            $.validator.addMethod("alphabetsnspace", function(value, element) {
+                return this.optional(element) || /^[a-zA-Z\s]+$/.test(value);
+            }, 'Only letters and space will accept');
+
+            $.validator.addMethod("tendigitisnumber", function(value, element) {
+                return this.optional(element) || /^[0-9]{10}$/.test(value);
+            }, 'Enter 10 digitis number');
+
+            /** Dynamically add validation */
+            function addValidation(elemKey) {
+                $(`input[name="name[${elemKey}]"]`).rules('add', {
+                    required : true,
+                    minlength: 3,
+                    maxlength: 16,
+                    alphabetsnspace: true,
+                    messages : { 
+                        required : 'Please enter name',
+                        minlength: 'Minimum 3 chars required',
+                        maxlength: 'Maximum 16 chars accepted'
+                    }
+                });
+
+                $(`input[name="email[${elemKey}]"]`).rules('add', {
+                    required : true,
+                    email: true,
+                    messages : { 
+                        required : 'Please enter email',
+                        email: 'Enter valid email'
+                    }
+                });
+
+                $(`input[name="mobile[${elemKey}]"]`).rules('add', {
+                    required : true,
+                    tendigitisnumber: true,
+                    messages : { 
+                        required : 'Please enter email'
+                    }
+                });
+
+                $(`select[name="designation[${elemKey}]"]`).rules('add', {
+                    required : true,
+                    messages : { 
+                        required : 'Please select designation'
+                    }
+                });
+
+                $(`input[type="radio"][name="sex[${elemKey}]"]`).rules('add', {
+                    required : true,
+                    messages : { 
+                        required : 'Please select sex'
+                    }
+                });
+
+                $(`input[type="checkbox"][name="skills[${elemKey}]"]`).rules('add', {
+                    required : true,
+                    minlength: 2,
+                    messages : { 
+                        required : 'Please select any skill',
+                        minlength: 'Atleast select 2 skills'
+                    }
+                });
+            }
+            addValidation(0);
+
+            /** create custom json */
+            function frmResultData(isPretty = false) {
+                let resultData = [];
+                $('.get-name').each(function(index, item) {
+                    let obj = {};
+                    index = item.id.slice(-1);
+                    obj['name'] = item.value;
+                    obj['email'] = ($(`input[name="email[${index}]"]`).val() !== undefined) ? $(`input[name="email[${index}]"]`).val() : '';
+                    obj['mobile'] = ($(`input[name="mobile[${index}]"]`).val() !== undefined) ? $(`input[name="mobile[${index}]"]`).val() : '';
+                    obj['designation'] = ($(`select[name="designation[${index}]"]`).val() !== undefined) ? $(`select[name="designation[${index}]"]`).val() : '';
+                    obj['sex'] = ($(`input[type="radio"][name="sex[${index}]"]`).val() !== undefined) ? $(`input[type="radio"][name="sex[${index}]"]`).val() : '';
+                    let skills = [];
+                    if($(`input[type="checkbox"][name="skills[${index}]"]`) !== undefined && $(`input[type="checkbox"][name="skills[${index}]"]:checked`).length) {
+                        $(`input[type="checkbox"][name="skills[${index}]"]:checked`).each(function(i, e) {
+                            skills.push(e.value);
+                        });
+                    }
+                    obj['skills'] = skills;
+                    resultData.push(obj);
+                });
+                //console.log(JSON.stringify(resultData));
+                return (isPretty) ? JSON.stringify(resultData, null, 4) : JSON.stringify(resultData);
+            }
+
+            /** Copy the raw json */
+            $('#copyJsonBtn').on('click', function() {
+                let copyJson = document.getElementById('resultDataCopy').innerHTML;
+                navigator.clipboard.writeText(copyJson);
+                displayToast();
+            });
+
+            /** SweetAlert2 loading */
+            const displayLoading = (title = 'Please Wait...', text = "System Processing Your Request", timer = 3000) => {
+                Swal.fire({
+                    title: title,
+                    text: text,
+                    allowEscapeKey: false,
+                    allowOutsideClick: false,
+                    timer: timer,
+                    didOpen: () => {
+                        Swal.showLoading()
+                    }
+                });
+            }
+
+            /** SweetAlert2 like toast */
+            const displayToast = () => {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'success',
+                    title: 'Its copied!',
+                    showConfirmButton: false,
+                    timer: 1000
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
